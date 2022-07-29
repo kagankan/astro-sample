@@ -1,0 +1,14 @@
+{
+  "name": "astro-sample",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^1.0.0-rc.2"
+  },
+  "devDependencies": {
+  }
+}
