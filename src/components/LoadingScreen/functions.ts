@@ -4,7 +4,7 @@ import { id } from './data';
 const start = Date.now();
 
 export const showLogo = () => {
-  gsap.to(`#${id} [data-loading-logo]`, {
+  gsap.to(`#${id} [data-loading-text]`, {
     opacity: 1,
     duration: 0.2,
   });
