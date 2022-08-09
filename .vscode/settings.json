@@ -1,4 +1,32 @@
 {
+  "path-intellisense.mappings": {
+    "@/": "${workspaceFolder}/src/",
+  },
+  "name-that-color.variablePrefix": "color-",
+  "stylelint.validate": [
+    "css",
+    "scss",
+  ],
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true,
+    },
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "astro",
+  ],
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  },
   "html.format.indentInnerHtml": true,
   "html.format.extraLiners": "",
   "[astro]": {

@@ -1,0 +1,12 @@
+@use "sass:math";
+
+.OpeningScene {
+  width: 100%;
+  height: 100%;
+  &::after {
+    display: block;
+    width: 100px;
+    height: 100px;
+    content: "sample";
+  }
+}

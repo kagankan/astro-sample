@@ -1,29 +1,27 @@
+---
+import '../styles/style.scss';
+import '../scenes/Opening/OpeningScene.scss';
+import LoadingScreen from '@/components/LoadingScreen/LoadingScreen.astro';
+
+
+---
+
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>sample</h1>
-        <div class="full-screen">
-            This is full screen.<br>
-            It works correctly on local server, but it doesn't wokk after build (with Safari 14.0)
-        </div>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample</title>
+  </head>
+  <body>
+    <div></div>
+    <div class="tw-relative tw-min-w-0 tw-min-h-0">
+      <div id="app"></div>
+      <div id="dom-elements">
+      </div>
+    </div>
+    <LoadingScreen />
+  </body>
 </html>
 
-<style>
-    .full-screen {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-color: aqua;
-    }
-</style>
-
-<script src="../scripts/main.js"></script>
+<script src="@/scenes/main.ts" />
