@@ -1,15 +1,11 @@
 import imageSea from '@/assets/images/hawaii_islands_map.png';
-import { hideLoadingScreen } from '@/components/LoadingScreen/functions';
+
 export default class OpeningScene extends Phaser.Scene {
   constructor() {
     super({ key: 'OpeningScene' });
   }
 
   preload() {
-    this.load.on('complete', () => {
-      hideLoadingScreen();
-    });
-
     this.load.image(imageSea, imageSea);
   }
 
