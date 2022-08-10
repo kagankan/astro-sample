@@ -1,3 +1,4 @@
+import './OpeningScene.scss';
 import imageSea from '@/assets/images/hawaii_islands_map.png';
 
 export default class OpeningScene extends Phaser.Scene {
