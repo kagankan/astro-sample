@@ -1,12 +1,14 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-// import dollObject from '@/assets/objects/doll.glb';
-import cameraMove from '@/assets/objects/camera_move.glb';
-// console.log(dollObject);
+import cameraMove from '@/assets/models/camera_move.glb';
+import dollObject from '@/assets/models/doll.glb';
+
 // モデルを読み込む
 const loader = new GLTFLoader();
-const model = await loader.loadAsync(cameraMove); // GLTFファイルをURLで指定する
-// model.scene.scale.set(0.25, 0.25, 0.25); // 大きさ調整
+const modelDoll = await loader.loadAsync(dollObject);
+modelDoll.scene.position.set(-2.5, 0, -2.5); // 位置調整
+const modelCameraMove = await loader.loadAsync(cameraMove);
+modelCameraMove.scene.scale.set(0.5, 0.5, 0.5); // 大きさ調整
 
 // 通常のカメラ
 // camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.25, 20);
@@ -14,29 +16,54 @@ const model = await loader.loadAsync(cameraMove); // GLTFファイルをURLで�
 
 // Blenderから出力したカメラを使う
 // https://discourse.threejs.org/t/how-do-i-load-the-camera-from-blender/26464/5
-const camera = model.cameras[0] as THREE.PerspectiveCamera;
-let scene: THREE.Scene, renderer: THREE.WebGLRenderer;
+const camera = modelCameraMove.cameras[0] as THREE.PerspectiveCamera;
+const scene = new THREE.Scene();
+let renderer: THREE.WebGLRenderer;
 
 // アニメーションミキサー（？）
-const mixer = new THREE.AnimationMixer(model.scene);
-const clips = model.animations;
-// const clip = THREE.AnimationClip.findByName(clips, 'Waving');
-const clip = THREE.AnimationClip.findByName(clips, 'CameraAction');
-const action = mixer.clipAction(clip);
-action.play();
+const mixerCameraMove = new THREE.AnimationMixer(modelCameraMove.scene);
+const clipsCameraMove = modelCameraMove.animations;
+const clipCameraMove = THREE.AnimationClip.findByName(clipsCameraMove, 'CameraAction');
+const actionCameraMove = mixerCameraMove.clipAction(clipCameraMove);
+actionCameraMove.play();
+scene.add(modelCameraMove.scene);
+
+const mixerDoll = new THREE.AnimationMixer(modelDoll.scene);
+const clipsDoll = modelDoll.animations;
+const clipDoll = THREE.AnimationClip.findByName(clipsDoll, 'Waving');
+const actionDoll = mixerDoll.clipAction(clipDoll);
+actionDoll.play();
+scene.add(modelDoll.scene);
+
 const clock = new THREE.Clock();
+let delta = 0;
+// フレームレート調整
+// https://stackoverflow.com/questions/11285065/limiting-framerate-in-three-js-to-increase-performance-requestanimationframe
+const INTERVAL = 1 / 20;
 
-init();
-render();
+const render = () => {
+  delta += clock.getDelta();
+  if (delta < INTERVAL) return;
+  console.log(delta);
+  mixerCameraMove.update(delta * 0.2);
+  mixerDoll.update(delta);
+  renderer.render(scene, camera);
 
-function init() {
+  delta = delta % INTERVAL;
+};
+
+const onWindowResize = () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+};
+
+const init = () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  scene = new THREE.Scene();
-  scene.add(model.scene);
+  // camera.far = 10;
   console.log(camera.near);
-  camera.far = 10;
   console.log(camera.far);
   // 環境光源 (光源が無いとモデルが真っ黒になるので必要)
   const ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -55,24 +82,10 @@ function init() {
   renderer.toneMappingExposure = 1;
   renderer.outputEncoding = THREE.sRGBEncoding;
   container.appendChild(renderer.domElement);
+  onWindowResize();
   renderer.setAnimationLoop(render);
 
   window.addEventListener('resize', onWindowResize);
-}
+};
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-// let delta = 0;
-// const INTERVAL = 1 / 30;// 30 fps
-
-function render() {
-  const SPEED = 0.5;
-  const deltaValue = clock.getDelta();
-  console.log(deltaValue);
-  mixer.update(deltaValue * SPEED);
-  renderer.render(scene, camera);
-}
+init();
