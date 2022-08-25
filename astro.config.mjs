@@ -7,6 +7,7 @@ import tailwind from 'tailwindcss';
 export default defineConfig({
   site: 'https://example.com',
   base: '/astro-sample',
+  outDir: './dist//astro-sample',
   vite: {
     plugins: [viteCommonjs()],
     css: {
