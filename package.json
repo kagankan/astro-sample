@@ -9,7 +9,7 @@
     "lint:check": "eslint 'src/**/*.{js,ts,astro}' && stylelint 'src/**/*.scss'"
   },
   "dependencies": {
-    "astro": "^1.0.1",
+    "astro": "^1.0.7",
     "autoprefixer": "^10.4.7",
     "gsap": "^3.10.4",
     "phaser": "^3.55.2",
