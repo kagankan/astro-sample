@@ -1,8 +1,6 @@
 ---
 import '../styles/style.scss';
 import LoadingScreen from '@/components/LoadingScreen/LoadingScreen.astro';
-
-
 ---
 
 <!DOCTYPE html>
@@ -16,11 +14,13 @@ import LoadingScreen from '@/components/LoadingScreen/LoadingScreen.astro';
     <div></div>
     <div class="tw-relative tw-min-w-0 tw-min-h-0">
       <div id="app"></div>
-      <div id="dom-elements">
-      </div>
+      <div id="dom-elements"></div>
     </div>
     <LoadingScreen />
+
+    <!-- 本来はHTMLの外側に書いていいのだが、prettier-plugin-astroのバグによりbodyタグの中に入ってしまう -->
+    <!-- https://github.com/withastro/prettier-plugin-astro/issues/260 -->
+    <!-- ※根本的にはコンパイラのバグらしい -->
+    <script src="@/scenes/main.ts"></script>
   </body>
 </html>
-
-<script src="@/scenes/main.ts" />

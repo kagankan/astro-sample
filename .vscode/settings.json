@@ -27,8 +27,6 @@
       "source.fixAll.eslint": true
     }
   },
-  "html.format.indentInnerHtml": true,
-  "html.format.extraLiners": "",
   "[astro]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
