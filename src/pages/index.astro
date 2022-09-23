@@ -1,26 +1,16 @@
 ---
-import '../styles/style.scss';
-import LoadingScreen from '@/components/LoadingScreen/LoadingScreen.astro';
+import Wrapper from '@/components/Wrapper.astro';
 ---
 
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sample</title>
   </head>
   <body>
-    <div></div>
-    <div class="tw-relative tw-min-w-0 tw-min-h-0">
-      <div id="app"></div>
-      <div id="dom-elements"></div>
-    </div>
-    <LoadingScreen />
-
-    <!-- 本来はHTMLの外側に書いていいのだが、prettier-plugin-astroのバグによりbodyタグの中に入ってしまう -->
-    <!-- https://github.com/withastro/prettier-plugin-astro/issues/260 -->
-    <!-- ※根本的にはコンパイラのバグらしい -->
-    <script src="@/scenes/main.ts"></script>
+    <Wrapper>
+      <nav slot="header">ヘッダー内に入る</nav>
+      <p>コンテンツ</p>
+    </Wrapper>
   </body>
 </html>

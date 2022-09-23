@@ -8,6 +8,9 @@ export default defineConfig({
   site: 'https://example.com',
   base: '/astro-sample',
   vite: {
+    build: {
+      assetsInlineLimit: 0,
+    },
     plugins: [viteCommonjs()],
     css: {
       postcss: {
