@@ -1,6 +1,5 @@
 ---
-import image from '@/assets/images/hawaii_islands_map.png';
-import Img from '@/components/Img.astro';
+import sampleImage from '@/assets/images/hawaii_islands_map.png';
 ---
 
 <!DOCTYPE html>
@@ -9,6 +8,6 @@ import Img from '@/components/Img.astro';
     <title>Sample</title>
   </head>
   <body>
-    <Img src={image} />
+    <img src={sampleImage.src} width={sampleImage.width} height={sampleImage.height} alt="" />
   </body>
 </html>
