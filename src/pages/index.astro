@@ -1,5 +1,6 @@
 ---
-import Wrapper from '@/components/Wrapper.astro';
+import image from '@/assets/images/hawaii_islands_map.png';
+import Img from '@/components/Img.astro';
 ---
 
 <!DOCTYPE html>
@@ -8,9 +9,6 @@ import Wrapper from '@/components/Wrapper.astro';
     <title>Sample</title>
   </head>
   <body>
-    <Wrapper>
-      <nav slot="header">ヘッダー内に入る</nav>
-      <p>コンテンツ</p>
-    </Wrapper>
+    <Img src={image} />
   </body>
 </html>
